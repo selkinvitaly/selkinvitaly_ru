@@ -1,0 +1,98 @@
+.g-contacts
+  background-color: #38424f
+  color: #fff
+
+  base-section()
+
+  &__desc
+    margin-bottom: (20/16)rem
+
+  &-form
+    width: 50%
+    margin: 0 auto
+
+  &-name
+  &-email
+  &-message
+    margin-bottom: (14/16)rem
+
+    &__input
+      display: block
+      width: 100%
+      border-bottom: 3px solid #566070
+      color: #333
+
+      &::placeholder
+        color: #999
+
+      &:focus
+        border-bottom-color: #1a1a1a
+
+  &-name
+  &-email
+    &__input
+      display: block
+      width: 100%
+      height: (42/16)rem
+      padding: 0 1rem
+
+  &-message
+    &__input
+      resize: none
+      height: (100/16)rem
+      padding: 1rem
+
+  &-send
+    background-color: transparent
+    color: #fff
+    border: 2px solid #fff
+    display: block
+    font-size: 0
+    width: 100%
+    height: (42/16)rem
+    line-height: (38/16)rem
+    transition: background-color .3s 0s, color .3s 0s
+
+    &_state_error
+      color: #ad0000 !important
+      background-color: #fff
+
+    &_state_error &__icn_error
+      display: inline-block
+
+    &_state_success
+      color: #006f00 !important
+      background-color: #fff
+
+    &_state_success &__icn_success
+      display: inline-block
+
+    &_state_loading
+      background-color: #fff
+
+    &_state_loading &__loader
+      display: inline-block
+
+    &_state_loading &__txt
+      display: none
+
+    &__icn
+      display: none
+      vertical-align: middle
+      width: (20/16)rem
+      height: (20/16)rem
+      fill: currentColor
+      margin-right: (7/16)rem
+
+    &__txt
+      display: inline-block
+      vertical-align: middle
+      font-size: 1rem
+
+    &__loader
+      display: none
+      vertical-align: middle
+
+    &:hover
+      background-color: #fff
+      color: rgba(#221a15, .95)

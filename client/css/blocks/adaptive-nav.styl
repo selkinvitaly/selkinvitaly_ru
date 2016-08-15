@@ -1,0 +1,64 @@
+.g-adaptive-nav
+  background-color: rgba(#221a15, .95)
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  color: #fff
+  z-index: $z-top-nav
+
+  &_closed
+    display: none
+
+  &-close
+    position: absolute
+    top: 1rem
+    right: 1rem
+    width: (50/16)rem
+    height: (50/16)rem
+    color: #fff
+    background: transparent
+
+    &__icn
+      display: block
+      width: 100%
+      height: 100%
+      fill: currentColor
+
+  &-lst
+    display: block
+    list-style: none
+
+  &-itm
+    display: block
+
+    &__lnk
+      display: block
+      font-size: (20/16)rem
+      color: inherit
+      text-align: center
+      font-weight: bold
+      text-transform: uppercase
+      text-decoration: none
+      height: 25vh
+      line-height: @height
+
+      &:hover
+        background-color: #fff
+        color: #221a15
+
+.g-hum-open
+  display: none
+  position: absolute
+  top: (10/16)rem
+  right: 0rem
+  color: currentColor
+  width: (30/16)rem
+  height: (30/16)rem
+
+  &__icn
+    display: block
+    width: 100%
+    height: 100%
+    fill: currentColor

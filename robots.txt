@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: http://selkinvitaly.ru/sitemap.xml
+Host: selkinvitaly.ru

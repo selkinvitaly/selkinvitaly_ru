@@ -1,0 +1,35 @@
+- function getPath(path) {
+-   return bundle(path);
+- }
+
+doctype html
+html(lang="ru")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="format-detection" content="telephone=no")
+    meta(http-equiv="x-rim-auto-match" content="none")
+    title 404 - Not Found
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/common.css"))
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/app.css"))
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/media.css"))
+    <!--[if lt IE 9]>
+    script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+    <![endif]-->
+  body
+    <!-- Google Tag Manager -->
+    noscript
+      iframe(src="//www.googletagmanager.com/ns.html?id=GTM-NN2QLB" height="0" width="0" style="display:none;visibility:hidden")
+    
+    script.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NN2QLB');
+    <!-- End Google Tag Manager -->
+
+    .g-error-wrap
+      section.g-error-info
+        h1.g-error-info__code 404
+        p.g-error-info__desc Page not found!
+
+      .g-error-footer
+        include ./blocks/footer.pug

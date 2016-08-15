@@ -1,0 +1,27 @@
+section.g-contacts(data-goto-area="contacts")
+  .g-main-middle
+    h2.g-contacts__title Contacts
+
+    .g-contacts__desc This form is unpredictable, but you can try your luck if you want to contact me:
+
+    form.g-contacts-form(action="/send" method="post")
+      p.g-contacts-name
+        input.g-contacts-name__input(type="text" name="name" placeholder="Your name" maxlength="32" required)
+
+      p.g-contacts-email
+        input.g-contacts-email__input(type="email" name="email" placeholder="Your e-mail" maxlength="32" required)
+
+      p.g-contacts-message
+        textarea.g-contacts-message__input(maxlength="1024" name="message" placeholder="Your message" required)
+
+      p.g-contacts-submit
+        button.g-contacts-send
+          svg.g-contacts-send__icn(class="g-contacts-send__icn_error")
+            use(xlink:href=getSvgIcon("error"))
+              
+          svg.g-contacts-send__icn(class="g-contacts-send__icn_success")
+            use(xlink:href=getSvgIcon("success"))
+              
+          img.g-contacts-send__loader(src="assets/img/main/loader.gif" alt="loading...")
+              
+          span.g-contacts-send__txt Send message!

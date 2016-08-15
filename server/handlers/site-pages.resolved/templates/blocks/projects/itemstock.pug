@@ -1,0 +1,48 @@
+.g-project-view(class="g-project-view_closed" data-project-view="itemstock")
+  .g-project-view-win
+    a.g-project-view-close(href="#close-view")
+      svg.g-project-view-close__icn
+        use(xlink:href=getSvgIcon("cross"))
+          
+      span.g-project-view-close__key Esc
+      
+    .g-project-view-gal
+      .g-project-view-gal-images
+        img(src="assets/img/content/projects/itemstock/1.png" alt="")
+        img(src="assets/img/content/projects/itemstock/2.png" alt="")
+        img(src="assets/img/content/projects/itemstock/3.png" alt="")
+          
+      div(class="blueimp-gallery blueimp-gallery-carousel blueimp-gallery-controls")
+        div(class="slides")
+        a(class="prev") ‹
+        a(class="next") ›
+        a(class="play-pause")
+      
+    .g-project-view-cont
+      h2.g-project-view__title ItemStock - Sport shop nutrition
+      
+      p.g-project-view__desc My task in the project was to develop client interface by the supplied layouts and API (request for goods from server, filtering and sorting of goods, etc).
+      
+      .g-project-view-tech
+        h3.g-project-view-tech__title Technologies:
+        
+        ul.g-project-view-tech-lst
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key Frontend:
+            p.g-project-view-tech-itm__val
+              span pre/post processors
+              span templating engine
+              span build tools
+              
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key JS libs:
+            p.g-project-view-tech-itm__val
+              span React
+              span react-select
+              span sliders
+              span etc.
+              
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key VCS:
+            p.g-project-view-tech-itm__val
+              span git

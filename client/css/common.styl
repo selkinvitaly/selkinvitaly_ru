@@ -1,0 +1,50 @@
+// GLOBAL
+@require "globals/fonts"
+@require "globals/variables"
+@require "helpers/mixins"
+@require "globals/normalize"
+@require "globals/reset"
+@require "globals/base"
+
+// VENDOR
+@require "vendor/blueimp-gallery"
+
+.g-error
+  &-wrap
+    position: relative
+    height: 100vh
+    background-color: rgba(#221a15, .95)
+
+  &-footer
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+
+  &-info
+    color: #fff
+    position: absolute
+    top: 40%
+    left: 50%
+    transform: translate(-50%, -50%)
+    text-align: center
+
+    &__code
+      font-size: 9rem
+      line-height: 1
+      margin-bottom: 1rem
+
+    &__desc
+      font-size: 2rem
+      font-weight: bold
+
+.g-main-middle
+  max-width: $w-main-middle
+  margin-left: auto
+  margin-right: auto
+
+  &_relative
+    position: relative
+
+abbr
+  cursor: help

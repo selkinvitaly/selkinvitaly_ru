@@ -1,0 +1,22 @@
+nav.g-top-nav(class="g-top-nav")
+  .g-main-middle(class="g-main-middle_relative")
+    .g-top-nav-logo
+      a.g-top-nav-logo__lnk(data-goto-link="top" href="/") Selkin
+
+    .g-top-nav-menu
+      menu.g-top-menu
+        li.g-top-menu-itm
+          a.g-top-menu-itm__lnk(data-goto-link="about" href="#about") About me
+
+        li.g-top-menu-itm
+          a.g-top-menu-itm__lnk(data-goto-link="education" href="#education") Education
+
+        li.g-top-menu-itm
+          a.g-top-menu-itm__lnk(data-goto-link="experience" href="#experience") Experience
+
+        li.g-top-menu-itm
+          a.g-top-menu-itm__lnk(data-goto-link="contacts" href="#contacts") Contact me
+
+    a.g-hum-open(href="#open_menu")
+      svg.g-hum-open__icn
+        use(xlink:href=getSvgIcon("hum-menu"))

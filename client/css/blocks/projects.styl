@@ -1,0 +1,59 @@
+.g-projects
+  background-color: #566070
+  padding-bottom: 0
+  color: #fff
+
+  base-section()
+
+  &-lst
+    display: block
+    list-style: none
+    font-size: 0
+    margin: 0 (-25/16)rem
+
+  &-cell
+    display: inline-block
+    vertical-align: top
+    width: (100% / 4)
+    padding: 0 (25/16)rem
+    margin-bottom: (50/16)rem
+    font-size: 1rem
+
+  &-itm
+    display: block
+    position: relative
+    color: inherit
+    text-decoration: none
+
+    &-over
+      opacity: 0
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      border: 1px solid #2b333d
+      background-color: rgba(#fff, .5)
+      transition: border-width .3s 0s
+
+      &__name
+        position: relative
+        top: 50%
+        text-align: center
+        transform: translateY(-50%)
+        padding: 0 (10/16)rem
+        text-transform: lowercase
+        color: #333
+        font-weight: bold
+        text-transform: uppercase
+        font-size: (20/16)rem
+
+    &:hover &-over
+      opacity: 1
+      border-width: (15/16)rem
+
+    &-prev
+      &__img
+        display: block
+        width: 100%
+        height: auto

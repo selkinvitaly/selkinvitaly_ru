@@ -1,0 +1,124 @@
+.g-project-view
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(#000, .7)
+  padding: (50/16)rem 0
+  overflow-y: auto
+  z-index: $z-view-project
+
+  &_closed
+    display: none
+
+  &-win
+    position: relative
+    max-width: (1040/16)rem
+    margin: 0 auto
+    background-color: #fff
+    box-shadow: 0 0 25px 10px rgba(#000, .25)
+
+  &-close
+    display: block
+    z-index: 1
+    position: absolute
+    right: -(20/16)rem
+    top: -(20/16)rem
+    width: (40/16)rem
+    height: (40/16)rem
+    background-color: #fff
+    border-radius: 50%
+    box-shadow: 0 0 5px 2px rgba(#000, .2)
+    color: #666
+    text-decoration: none
+
+    &:hover
+      color: #333
+
+    &__icn
+      display: block
+      width: (30/16)rem
+      height: (30/16)rem
+      position: absolute
+      left: 50%
+      top: 45%
+      margin-top: -(@height / 2)
+      margin-left: -(@width / 2)
+      fill: currentColor
+
+    &__key
+      text-align: center
+      display: block
+      position: relative
+      top: (25/16)rem
+      font-size: (9/16)rem
+      text-transform: lowercase
+
+  &-gal
+    background: radial-gradient(ellipse at center, transparent 0, rgba(#000, .8) 100%), url("../img/main/view-project-bg.jpg") top left repeat
+    padding: (20/16)rem 0
+
+    &-images
+      display: none
+
+  &-cont
+    padding: (20/16)rem
+
+  &__title
+    line-height: 1
+    margin-bottom: (20/16)rem
+    font-size: (24/16)rem
+    font-weight: bold
+
+  &__desc
+    margin-bottom: 1rem
+
+  &__link
+    a
+      text-decoration: underline
+
+      &:hover
+        text-decoration: none
+
+      &:link
+        color: #077fcc
+
+      &:visited
+        color: purple
+
+  &-tech
+    margin-bottom: 1rem
+    &__title
+      line-height: 1
+      font-size: (20/16)rem
+      font-weight: normal
+      margin-bottom: 1rem
+
+    &-lst
+      display: block
+      font-size: (14/16)rem
+
+    &-itm
+      display: table
+      width: 100%
+      margin-bottom: (2/16)rem
+
+      &__key
+        display: table-cell
+        vertical-align: top
+        font-weight: bold
+        width: (110/16)rem
+
+      &__val
+        display: table-cell
+        vertical-align: top
+
+        span
+          display: inline-block
+          vertical-align: middle
+          margin-right: (7/16)rem
+          border: 1px solid #ccc
+          background-color: #fff
+          padding: 0 (7/16)rem
+          border-radius: 5px

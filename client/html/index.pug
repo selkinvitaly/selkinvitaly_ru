@@ -1,0 +1,62 @@
+- function getPath(path) {
+-   return bundle(path);
+- }
+
+- function getSvgIcon(icon) {
+-   var spritePath = "assets/img/sprite.svg";
+-
+-   return bundle(spritePath) + "#" + icon;  
+- }
+
+doctype html
+html(lang="ru")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="format-detection" content="telephone=no")
+    meta(http-equiv="x-rim-auto-match" content="none")
+    meta(name="keywords" content="")
+    meta(name="description" content="")
+    meta(property="og:site_name" content="Selkin Vitaly - Web developer")
+    meta(property="og:type" content="website")
+    meta(property="og:url" content="http://selkinvitaly.ru")
+    meta(property="og:title" content="Selkin Vitaly - Web developer")
+    meta(property="og:description" content="")
+    meta(name="yandex-verification" content="68efb734ec7ab68a")
+    title Selkin Vitaly - Web developer
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/common.css"))
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/app.css"))
+    link(rel="stylesheet" type="text/css" href=getPath("assets/css/media.css"))
+    <!--[if lt IE 9]>
+    script(src="http://html5shiv.googlecode.com/svn/trunk/html5.js")
+    <![endif]-->
+  body
+    <!-- Google Tag Manager -->
+    noscript
+      iframe(src="//www.googletagmanager.com/ns.html?id=GTM-NN2QLB" height="0" width="0" style="display:none;visibility:hidden")
+    
+    script.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NN2QLB');
+    <!-- End Google Tag Manager -->
+    
+    .g-base-wrap
+      include ./blocks/projects/mailer.pug
+      include ./blocks/projects/dimsalon.pug
+      include ./blocks/projects/itemstock.pug
+      include ./blocks/projects/knowledge.pug
+            
+      include ./blocks/top-nav.pug
+      include ./blocks/adaptive-nav.pug
+      include ./blocks/welcome.pug
+      include ./blocks/about-me.pug
+      include ./blocks/skills.pug
+      include ./blocks/education.pug
+      include ./blocks/study.pug
+      include ./blocks/works.pug
+      include ./blocks/projects.pug
+      include ./blocks/contacts.pug
+      include ./blocks/footer.pug
+      
+    script(src=getPath("assets/js/vendor.js"))
+    script(src=getPath("assets/js/app.js"))

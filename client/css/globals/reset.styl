@@ -1,0 +1,44 @@
+html
+  box-sizing: border-box
+
+*
+  box-sizing: inherit
+
+  &::before
+  &::after
+    box-sizing: inherit
+
+*:focus
+  outline: 0
+
+a
+  &:focus
+    outline: thin dotted
+
+p
+ul
+menu
+h1
+h2
+h3
+h4
+h5
+h6
+  margin: 0
+  padding: 0
+
+input
+  border: 0
+  padding: 0
+
+*[type="text"]
+  appearance: none
+  border-radius: 0
+
+textarea
+  vertical-align: top
+  border: none
+  appearance: none
+
+select
+  cursor: pointer

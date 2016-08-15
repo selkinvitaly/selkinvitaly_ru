@@ -1,0 +1,29 @@
+.g-about-me
+  base-section()
+
+  &-layout
+    font-size: 0
+
+  &-desc
+  &-pic
+    font-size: 1rem
+    display: inline-block
+    vertical-align: top
+
+  &-pic
+    width: (360/16)rem
+
+  &-ava
+    &__img
+      display: block
+      border-radius: 50%
+      width: (300/16)rem
+      height: @width
+
+  &-desc
+    width: calc(100% - 360px)
+    font-size: (18/16)rem
+    padding-right: (50/16)rem
+
+    p
+      margin-bottom: (20/16)rem

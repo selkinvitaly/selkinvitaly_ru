@@ -1,0 +1,55 @@
+.g-project-view(class="g-project-view_closed" data-project-view="dimsalon")
+  .g-project-view-win
+    a.g-project-view-close(href="#close-view")
+      svg.g-project-view-close__icn
+        use(xlink:href=getSvgIcon("cross"))
+          
+      span.g-project-view-close__key Esc
+      
+    .g-project-view-gal
+      .g-project-view-gal-images
+        img(src="assets/img/content/projects/dimsalon/1.png" alt="")
+        img(src="assets/img/content/projects/dimsalon/2.png" alt="")
+        img(src="assets/img/content/projects/dimsalon/3.png" alt="")
+          
+      div(class="blueimp-gallery blueimp-gallery-carousel blueimp-gallery-controls")
+        div(class="slides")
+        a(class="prev") ‹
+        a(class="next") ›
+        a(class="play-pause")
+      
+    .g-project-view-cont
+      h2.g-project-view__title Dimsalon - Website for a beauty salon
+      
+      p.g-project-view__desc <em>The goal</em> is to develop website for a beauty salon. The website should include price list for all services and online ordering. Manager and owner needs to be notified by SMS and email when ordering from the website.
+      
+      .g-project-view-tech
+        h3.g-project-view-tech__title Technologies:
+        
+        ul.g-project-view-tech-lst
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key Backend:
+            p.g-project-view-tech-itm__val
+              span Node.js
+              span Koa
+
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key Frontend:
+            p.g-project-view-tech-itm__val
+              span pre/post processors
+              span templating engine
+              span build tools
+              span client-side JS
+              
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key Deployment:
+            p.g-project-view-tech-itm__val
+              span Heroku
+              span Cloudflare
+              span SMTP transport
+              span SMS transport
+              
+          li.g-project-view-tech-itm
+            span.g-project-view-tech-itm__key VCS:
+            p.g-project-view-tech-itm__val
+              span git
