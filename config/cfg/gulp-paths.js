@@ -41,7 +41,7 @@ module.exports = {
   },
 
   static: {
-    src: ["./robots.txt", "./sitemap.xml"],
+    src: ["./robots.txt", "./sitemap.xml", "favicon.ico", "favicon64.png"],
     dest: "./server/public/"
   },
 
