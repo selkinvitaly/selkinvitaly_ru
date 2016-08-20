@@ -1,6 +1,6 @@
 {
   "name": "selkinvitaly",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "selkinvitaly.ru on Node.js",
   "scripts": {
     "build:clean": "./node_modules/.bin/gulp build:clean",
