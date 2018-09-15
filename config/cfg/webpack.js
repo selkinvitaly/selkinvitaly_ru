@@ -21,28 +21,18 @@ module.exports = function(root) {
       ]
     },
     output: {
-      path: path.join(root, "./server/public/assets/js/"),
+      path: path.resolve(root, "./server/public/assets/js/"),
       filename: "[name].js",
       chunkFilename: "[id].js",
       publicPath: "",
       pathinfo: !isDeploy
     },
-    debug: isWatch,
     devtool: isWatch ? "module-inline-source-map" : null,
     resolve: {
       modules: [
-        [ root ],
-        "node_modules" ],
-      extensions: ["", ".js"],
-      enforceExtension: false,
-      enforceModuleExtension: false,
-      mainFields: ["main"],
-      descriptionFiles: ["package.json"]
-    },
-    resolveLoader: {
-      modulesDirectories: ["node_modules"],
-      extensions: ["", ".loader.js", ".js"],
-      moduleTemplates: ["*-loader", "*"]
+        root,
+        "node_modules"
+      ]
     },
     plugins: [
       new webpack.NoErrorsPlugin(),
