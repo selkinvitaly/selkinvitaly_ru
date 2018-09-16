@@ -1,144 +1,103 @@
-"use strict";
+import BaseComponent from './BaseComponent';
 
-import BaseComponent from "./BaseComponent";
 
-/**
- * This class is used for smooth scrolling on the page
- * This class uses delegate design pattern
- *
- * It requires:
- *  - requestAnimationFrame (polyfill)
- *  - Element.prototype.closest (polyfill)
- *  - window.performance (polyfill)
- *  - Promise (polyfill)
- */
 export default class GoToScroll extends BaseComponent {
-  constructor(opts) {
-    super(opts);
 
-    this._ATTR_AREA = "data-goto-area";
-    this._ATTR_LINK = "data-goto-link";
+    constructor(opts) {
+        super(opts);
 
-    // protected
-    this._clickHandler = e => {
-      let foundLink = this._findTargetLink(e.target);
+        this._ATTR_AREA = 'data-goto-area';
+        this._ATTR_LINK = 'data-goto-link';
 
-      if (!foundLink) {
-        return;
-      }
+        this._clickHandler = e => {
+            const foundLink = this._findTargetLink(e.target);
 
-      e.preventDefault();
+            if (!foundLink) {
+                return;
+            }
 
-      let foundArea = this._findArea(foundLink);
+            e.preventDefault();
 
-      if (!foundArea) {
-        return;
-      }
+            const foundArea = this._findArea(foundLink);
 
-      let scrollCoordY = this._calcOffsetY(foundArea);
-      let scrollAnimate = promisify(scrollTo);
+            if (!foundArea) {
+                return;
+            }
 
-      scrollAnimate(scrollCoordY, 300);
-    };
+            const scrollCoordY = this._calcOffsetY(foundArea);
+            const scrollAnimate = promisify(scrollTo);
 
-    opts.elems.container.addEventListener("click", this._clickHandler);
-  }
+            scrollAnimate(scrollCoordY, 300);
+        };
 
-  /**
-   * It looks for the target link in DOM by data attribute
-   *
-   * @param {element}  targetOfEvent event.target element
-   * @return {element} found element
-   * @return {null}    If element wasn't found
-   */
-  _findTargetLink(targetOfEvent) {
-    return targetOfEvent.closest(`*[${this._ATTR_LINK}]`);
-  }
+        opts.elems.container.addEventListener('click', this._clickHandler);
+    }
 
-  /**
-   * It looks for the target area in DOM by target link
-   *
-   * @param {element}  the target link
-   * @return {element} found element
-   * @return {null}    If element wasn't found
-   */
-  _findArea(targetLink) {
-    let areaName = targetLink.getAttribute(this._ATTR_LINK);
+    _findTargetLink(targetOfEvent) {
+        return targetOfEvent.closest(`*[${this._ATTR_LINK}]`);
+    }
 
-    return document.querySelector(`*[${this._ATTR_AREA}="${areaName}"]`);
-  }
+    _findArea(targetLink) {
+        const areaName = targetLink.getAttribute(this._ATTR_LINK);
 
-  /**
-   * It calculates top offset of document for the target link
-   *
-   * @param {element} the target area
-   * @return {number} top offset of document
-   */
-  _calcOffsetY(targetArea) {
-    let { top } = targetArea.getBoundingClientRect();
+        return document.querySelector(`*[${this._ATTR_AREA}='${areaName}']`);
+    }
 
-    // check to see If was passed the parameter "offset"
-    let offset = +this._passedOpts.offset || 0;
-    let calculatedTop = top + window.pageYOffset - offset;
+    _calcOffsetY(targetArea) {
+      const { top } = targetArea.getBoundingClientRect();
 
-    return (calculatedTop > 0) ? calculatedTop : 0;
-  }
+      // check to see If was passed the parameter 'offset'
+      const offset = +this._passedOpts.offset || 0;
+      const calculatedTop = top + window.pageYOffset - offset;
+
+      return (calculatedTop > 0) ? calculatedTop : 0;
+    }
 
 }
 
-/**
- * Animate of vertical scrolling
- * @param  {number}   to       Y coordinate of the end position
- * @param  {number}   [ms=200] The duration, ms
- * @param  {function} cb       callback
- * @return {undefined}
- */
+
 function scrollTo(to, ms = 200, cb) {
-  let start   = window.performance.now();
-  let from    = window.pageYOffset;
-  let scrollX = window.pageXOffset;
-  let delta   = to - from;
+    const start   = window.performance.now();
+    const from    = window.pageYOffset;
+    const scrollX = window.pageXOffset;
+    const delta   = to - from;
 
-  window.requestAnimationFrame(function step(timestamp) {
-    let timePassed = timestamp - start;
+    window.requestAnimationFrame(function step(timestamp) {
+        let timePassed = timestamp - start;
 
-    if (timePassed > ms || delta === 0) {
-      timePassed = ms;
-    }
-
-    let progress = timePassed / ms;
-    let current  = progress * delta + from;
-
-    window.scrollTo(scrollX, current + 1); // 1px for firefox
-
-    if (timePassed < ms) {
-      window.requestAnimationFrame(step);
-    } else if (cb) {
-      cb(null);
-    }
-  });
-}
-
-/**
- * It's decorator for promisify functions
- * @param  {func} func It's function that takes the last parameter of callback
- * @return {func} func Decorated function
- */
-function promisify(func) {
-  return function(...args) {
-
-    return new Promise(resolve => {
-      let done = function(err, res) {
-        if (err !== null) {
-          reject(err);
+        if (timePassed > ms || delta === 0) {
+            timePassed = ms;
         }
 
-        resolve(res);
-      };
+        const progress = timePassed / ms;
+        const current  = progress * delta + from;
 
-      args.push(done);
-      func.apply(this, args);
+        window.scrollTo(scrollX, current + 1); // 1px for firefox
+
+        if (timePassed < ms) {
+            window.requestAnimationFrame(step);
+        } else if (cb) {
+            cb(null);
+        }
     });
+}
 
-  };
+
+function promisify(func) {
+    return function(...args) {
+        return new Promise(resolve => {
+            const done = function(err, res) {
+                if (err !== null) {
+                    reject(err);
+                    return;
+                }
+
+                resolve(res);
+            };
+
+            args.push(done);
+            func.apply(this, args);
+        });
+
+    };
 }

@@ -1,13 +1,10 @@
-"use strict";
+const config = require('config');
 
-const gulp    = require("gulp");
-const config  = require("config");
 
 module.exports = function(options) {
-  let server  = options && options.sync;
+    const server = options && options.sync;
 
-  return function() {
-    server.init(config.get("gulp.plugins.browserSync"));
-  };
-
+    return function() {
+        server.init(config.get('gulp.plugins.browserSync'));
+    };
 };

@@ -1,126 +1,116 @@
-"use strict";
+import BaseComponent from './BaseComponent';
 
-import BaseComponent from "./BaseComponent";
 
-/**
- * This class sends messages to email
- *
- * It requires:
- *  - classList interface (polyfill)
- *  - fetch interface (polyfill)
- */
 export default class SendMail extends BaseComponent {
-  constructor(opts) {
-    super(opts);
 
-    this._ERR_MSG_BAD_DATA = "Oops! You entered incorrect data!";
-    this._ERR_MSG_SERVER   = "The message hasn't been sent! Try again letter!";
-    this._OK_MSG_SENT      = "The message has been sent!";
+    constructor(opts) {
+        super(opts);
 
-    this._savedLabelButton = opts.elems.sendBtnText.textContent;
+        this._ERR_MSG_BAD_DATA = 'Oops! You entered incorrect data!';
+        this._ERR_MSG_SERVER   = 'The message hasn\'t been sent! Try again letter!';
+        this._OK_MSG_SENT      = 'The message has been sent!';
 
-    // protected
-    this._submitHandler = e => {
-      e.preventDefault();
+        this._savedLabelButton = opts.elems.sendBtnText.textContent;
 
-      let body = this._serializeForm();
+        this._submitHandler = e => {
+          e.preventDefault();
 
-      this._setLoadingState();
+          const body = this._serializeForm();
 
-      fetch("/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body
-      }).then(res => {
-        this._handleResponse(res.status);
-      }).catch(err => {
-        this._handleResponse(500);
-      });
-    };
+          this._setLoadingState();
 
-    opts.elems.form.addEventListener("submit", this._submitHandler);
-  }
+          fetch('/send', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body
+          }).then(res => {
+              this._handleResponse(res.status);
+          }).catch(err => {
+              this._handleResponse(500);
+          });
+        };
 
-  _handleResponse(statusCode) {
-    if (statusCode === 200) {
-      this._setSuccessState(this._OK_MSG_SENT);
-      this._resetForm();
-    } else if (statusCode === 400) {
-      this._setErrorState(this._ERR_MSG_BAD_DATA);
-    } else {
-      this._setErrorState(this._ERR_MSG_SERVER);
+        opts.elems.form.addEventListener('submit', this._submitHandler);
     }
 
-    setTimeout(() => {
-      this._setDefaultState();
-    }, 4000);
-  }
+    _handleResponse(statusCode) {
+        if (statusCode === 200) {
+            this._setSuccessState(this._OK_MSG_SENT);
+            this._resetForm();
+        } else if (statusCode === 400) {
+            this._setErrorState(this._ERR_MSG_BAD_DATA);
+        } else {
+            this._setErrorState(this._ERR_MSG_SERVER);
+        }
 
-  _setErrorState(msg) {
-    let buttonElem = this._passedOpts.elems.sendBtn;
-    let buttonTextElem = this._passedOpts.elems.sendBtnText;
-    let classes = this._passedOpts.classes;
+        setTimeout(() => this._setDefaultState(), 4000);
+    }
 
-    this._resetState();
-    buttonElem.disabled = true;
-    buttonTextElem.textContent = msg;
-    buttonElem.classList.add(classes.stateError);
-  }
+    _setErrorState(msg) {
+        const buttonElem = this._passedOpts.elems.sendBtn;
+        const buttonTextElem = this._passedOpts.elems.sendBtnText;
+        const classes = this._passedOpts.classes;
 
-  _setSuccessState(msg) {
-    let buttonElem = this._passedOpts.elems.sendBtn;
-    let buttonTextElem = this._passedOpts.elems.sendBtnText;
-    let classes = this._passedOpts.classes;
+        this._resetState();
+        buttonElem.disabled = true;
+        buttonTextElem.textContent = msg;
+        buttonElem.classList.add(classes.stateError);
+    }
 
-    this._resetState();
-    buttonElem.disabled = true;
-    buttonTextElem.textContent = msg;
-    buttonElem.classList.add(classes.stateSuccess);
-  }
+    _setSuccessState(msg) {
+        const buttonElem = this._passedOpts.elems.sendBtn;
+        const buttonTextElem = this._passedOpts.elems.sendBtnText;
+        const classes = this._passedOpts.classes;
 
-  _setLoadingState() {
-    let buttonElem = this._passedOpts.elems.sendBtn;
-    let classes = this._passedOpts.classes;
+        this._resetState();
+        buttonElem.disabled = true;
+        buttonTextElem.textContent = msg;
+        buttonElem.classList.add(classes.stateSuccess);
+    }
 
-    this._resetState();
-    buttonElem.disabled = true;
-    buttonElem.classList.add(classes.stateLoading);
-  }
+    _setLoadingState() {
+        const buttonElem = this._passedOpts.elems.sendBtn;
+        const classes = this._passedOpts.classes;
 
-  _setDefaultState() {
-    let buttonElem = this._passedOpts.elems.sendBtn;
-    let buttonTextElem = this._passedOpts.elems.sendBtnText;
+        this._resetState();
+        buttonElem.disabled = true;
+        buttonElem.classList.add(classes.stateLoading);
+    }
 
-    this._resetState();
-    buttonElem.disabled = false;
-    buttonTextElem.textContent = this._savedLabelButton;
-  }
+    _setDefaultState() {
+        const buttonElem = this._passedOpts.elems.sendBtn;
+        const buttonTextElem = this._passedOpts.elems.sendBtnText;
 
-  _resetState() {
-    let buttonElem = this._passedOpts.elems.sendBtn;
-    let classes = this._passedOpts.classes;
+        this._resetState();
+        buttonElem.disabled = false;
+        buttonTextElem.textContent = this._savedLabelButton;
+    }
 
-    buttonElem.classList.remove(classes.stateError);
-    buttonElem.classList.remove(classes.stateSuccess);
-    buttonElem.classList.remove(classes.stateLoading);
-  }
+    _resetState() {
+        const buttonElem = this._passedOpts.elems.sendBtn;
+        const classes = this._passedOpts.classes;
 
-  _resetForm() {
-    this._passedOpts.elems.nameField.value = "";
-    this._passedOpts.elems.emailField.value = "";
-    this._passedOpts.elems.messageField.value = "";
-  }
+        buttonElem.classList.remove(classes.stateError);
+        buttonElem.classList.remove(classes.stateSuccess);
+        buttonElem.classList.remove(classes.stateLoading);
+    }
 
-  _serializeForm() {
-    let name = this._passedOpts.elems.nameField.value;
-    let email = this._passedOpts.elems.emailField.value;
-    let message = this._passedOpts.elems.messageField.value;
+    _resetForm() {
+        this._passedOpts.elems.nameField.value = '';
+        this._passedOpts.elems.emailField.value = '';
+        this._passedOpts.elems.messageField.value = '';
+    }
 
-    let encode = encodeURIComponent;
+    _serializeForm() {
+        const name = this._passedOpts.elems.nameField.value;
+        const email = this._passedOpts.elems.emailField.value;
+        const message = this._passedOpts.elems.messageField.value;
 
-    return `name=${encode(name)}&email=${encode(email)}&message=${encode(message)}`;
-  }
+        const encode = encodeURIComponent;
+
+        return `name=${encode(name)}&email=${encode(email)}&message=${encode(message)}`;
+    }
 
 }
