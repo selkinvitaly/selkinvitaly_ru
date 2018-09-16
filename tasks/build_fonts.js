@@ -1,17 +1,16 @@
-"use strict";
+const gulp    = require('gulp');
+const changed = require('gulp-changed');
+const config  = require('config');
 
-const gulp    = require("gulp");
-const changed = require("gulp-changed");
-const config  = require("config");
 
 module.exports = function() {
-  let src  = config.get("gulp.tasks.fonts.src");
-  let dest = config.get("gulp.tasks.fonts.dest");
+    const src  = config.get('gulp.tasks.fonts.src');
+    const dest = config.get('gulp.tasks.fonts.dest');
 
-  return function() {
-    return gulp.src(src, { since: gulp.lastRun("build:fonts") })
-      .pipe(changed(dest))
-      .pipe(gulp.dest(dest));
-  };
+    return function() {
+        return gulp.src(src, { since: gulp.lastRun('build:fonts') })
+            .pipe(changed(dest))
+            .pipe(gulp.dest(dest));
+    };
 
 };

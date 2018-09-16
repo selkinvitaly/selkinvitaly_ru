@@ -5,7 +5,7 @@
  * Это используется при логгировании запросов через bunyan
  */
 
-const uuid = require("node-uuid").v4;
+const uuid = require("uuid/v4");
 
 exports.init = function(app) {
   app.use(function*(next) {

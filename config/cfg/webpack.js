@@ -1,72 +1,82 @@
-"use strict";
+const path    = require('path');
+const webpack = require('webpack');
 
-const path    = require("path");
-const webpack = require("webpack");
-const envs    = require("./environments");
+const envs    = require('./environments');
 
 const isWatch  = envs.isWatch;
 const isDeploy = envs.isDeploy;
 
+
 module.exports = function(root) {
 
-  let options = {
-    watch: isWatch,
-    context: root,
-    entry: {
-      app: ["./client/js/index"],
-      vendor: [
-        "./client/js/polyfills/index",
-        "./client/js/vendor/blueimp-gallery",
-        "./client/js/vendor/blueimp-helper"
-      ]
-    },
-    output: {
-      path: path.resolve(root, "./server/public/assets/js/"),
-      filename: "[name].js",
-      chunkFilename: "[id].js",
-      publicPath: "",
-      pathinfo: !isDeploy
-    },
-    devtool: isWatch ? "module-inline-source-map" : null,
-    resolve: {
-      modules: [
-        root,
-        "node_modules"
-      ]
-    },
-    plugins: [
-      new webpack.NoErrorsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: "vendor",
-        minChunks: Infinity
-      })
-    ],
-    module: {
-      loaders: [{
-        test: /\.js$/,
-        loader: "babel-loader",
-        include: [
-          path.join(root, "./client/js")
+    const options = {
+        watch: isWatch,
+        mode: 'none',
+        context: root,
+        entry: {
+            app: ['./client/js/index'],
+            vendor: [
+                './client/js/polyfills/index',
+                './client/js/vendor/blueimp-gallery',
+                './client/js/vendor/blueimp-helper'
+            ]
+        },
+        output: {
+            path: path.resolve(root, './server/public/assets/js/'),
+            filename: '[name].js',
+            chunkFilename: '[name].js',
+            publicPath: ''
+        },
+        devtool: isWatch ? 'module-inline-source-map' : false,
+        plugins: [
+            new webpack.NoEmitOnErrorsPlugin()
         ],
-        query: {
-          presets: ["es2015"]
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    default: false,
+                    vendors: false,
+                    commons: {
+                        test: (chunk) => {
+                            const isNodeModules = /[\\/]node_modules[\\/]/.test(chunk.resource);
+                            const isLocalVendor = /[\\/]client[\\/]js[\\/](polyfills|vendor)[\\/]/.test(chunk.resource);
+
+                            return isNodeModules || isLocalVendor;
+                        },
+                        name: 'vendor',
+                        reuseExistingChunk: true,
+                        enforce: true,
+                        chunks: 'all'
+                    }
+                }
+            }
+        },
+        module: {
+            rules: [{
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
+                }
+            }]
         }
-      }]
+    };
+
+    if (isDeploy) {
+        options.plugins.push(
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    'warnings': false,
+                    'drop_debugger': true,
+                    'drop_console' : true,
+                    'unsafe': true
+                }
+            })
+        );
     }
-  };
 
-  if (isDeploy) {
-    options.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          "warnings": false,
-          "drop_debugger": true,
-          "drop_console" : true,
-          "unsafe": true
-        }
-      })
-    );
-  }
-
-  return options;
+    return options;
 };

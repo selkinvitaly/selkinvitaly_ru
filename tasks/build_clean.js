@@ -1,24 +1,24 @@
-"use strict";
+const del         = require('del');
+const notify      = require('gulp-notify');
+const log         = require('fancy-log');
+const colors      = require('ansi-colors');
+const config      = require('config');
+const PluginError = require('plugin-error');
 
-const del    = require("del");
-const gutil  = require("gulp-util");
-const notify = require("gulp-notify");
-const config = require("config");
 
 module.exports = function(options) {
-  let dest = config.get("gulp.tasks.clean.dest");
+    const dest = config.get('gulp.tasks.clean.dest');
 
-  return function() {
-    return del(dest).then(paths => {
+    return function() {
+        return del(dest).then(paths => {
+            if (paths.length) {
+                log(`Deleted the output directory "${colors.magenta(dest)}"`);
+            }
 
-      if (paths.length) {
-        gutil.log(`Deleted the output directory "${gutil.colors.magenta(dest)}"`);
-      }
-
-    }, err => {
-      notify.onError({ title: "Output directory hasn't deleted!" })
-      throw new gutil.PluginError("del", err);
-    });
-  };
+        }, err => {
+            notify.onError({ title: 'Output directory hasn\'t deleted!' })
+            throw new PluginError('del', err);
+        });
+    };
 
 };

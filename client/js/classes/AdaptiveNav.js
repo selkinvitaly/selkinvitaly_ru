@@ -1,72 +1,56 @@
-"use strict";
+import BaseComponent from './BaseComponent';
 
-import BaseComponent from "./BaseComponent";
 
-/**
- * This class is used for adaptive navigation
- *
- * It requires:
- *  - classList interface (polyfill)
- */
 export default class AdaptiveNav extends BaseComponent {
-  constructor(opts) {
-    super(opts);
 
-    // protected
-    this._openHandler = e => {
-      e.preventDefault();
-      this.openMenu();
-    };
+    constructor(opts) {
+        super(opts);
 
-    // protected
-    this._closeHandler = e => {
-      e.preventDefault();
-      this.closeMenu();
-    };
+        this._openHandler = e => {
+            e.preventDefault();
+            this.openMenu();
+        };
 
-    // protected
-    this._chooseHandler = e => {
-      let foundItem = this._findMenuItem(e.target);
+        this._closeHandler = e => {
+            e.preventDefault();
+            this.closeMenu();
+        };
 
-      if (!foundItem) {
-        return;
-      }
+        this._chooseHandler = e => {
+            const foundItem = this._findMenuItem(e.target);
 
-      this.closeMenu();
-    };
+            if (!foundItem) {
+                return;
+            }
 
-    opts.elems.openBtn.addEventListener("click", this._openHandler);
-    opts.elems.closeBtn.addEventListener("click", this._closeHandler);
-    opts.elems.menuList.addEventListener("click", this._chooseHandler);
-  }
+            this.closeMenu();
+        };
 
-  /**
-   * It looks for the target item menu in DOM
-   *
-   * @param {element}  targetOfEvent event.target element
-   * @return {element} found element
-   * @return {null}    If element wasn't found
-   */
-  _findMenuItem(targetOfEvent) {
-    let classes = this._passedOpts.classes;
+        opts.elems.openBtn.addEventListener('click', this._openHandler);
+        opts.elems.closeBtn.addEventListener('click', this._closeHandler);
+        opts.elems.menuList.addEventListener('click', this._chooseHandler);
+    }
 
-    return targetOfEvent.closest("." + classes.menuItem);
-  }
+    _findMenuItem(targetOfEvent) {
+        const classes = this._passedOpts.classes;
 
-  openMenu() {
-    let menu = this._passedOpts.elems.menu;
-    let classes = this._passedOpts.classes;
+        return targetOfEvent.closest('.' + classes.menuItem);
+    }
 
-    menu.classList.remove(classes.closed);
-    document.body.style.overflow = "hidden";
-  }
+    openMenu() {
+        const menu = this._passedOpts.elems.menu;
+        const classes = this._passedOpts.classes;
 
-  closeMenu() {
-    let menu = this._passedOpts.elems.menu;
-    let classes = this._passedOpts.classes;
+        menu.classList.remove(classes.closed);
+        document.body.style.overflow = 'hidden';
+    }
 
-    menu.classList.add(classes.closed);
-    document.body.style.overflow = null;
-  }
+    closeMenu() {
+        const menu = this._passedOpts.elems.menu;
+        const classes = this._passedOpts.classes;
+
+        menu.classList.add(classes.closed);
+        document.body.style.overflow = null;
+    }
 
 }

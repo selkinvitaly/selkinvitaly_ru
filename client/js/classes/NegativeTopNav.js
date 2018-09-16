@@ -1,37 +1,30 @@
-"use strict";
+import BaseComponent from './BaseComponent';
 
-import BaseComponent from "./BaseComponent";
 
-/**
- * This class toggles CSS class for the top navigation
- *
- * It requires:
- *  - classList interface (polyfill)
- */
 export default class NegativeTopNav extends BaseComponent {
-  constructor(opts) {
-    super(opts);
 
-    // protected
-    this._scrollHandler = () => {
-      let currentScroll = window.pageYOffset;
-      let viewHeight = document.documentElement.clientHeight;
+    constructor(opts) {
+        super(opts);
 
-      let topNav = this._passedOpts.elems.topNav;
-      let classes = this._passedOpts.classes;
+        this._scrollHandler = () => {
+            const currentScroll = window.pageYOffset;
+            const viewHeight = document.documentElement.clientHeight;
 
-      let toggleHeight = viewHeight - topNav.offsetHeight;
+            const topNav = this._passedOpts.elems.topNav;
+            const classes = this._passedOpts.classes;
 
-      let isNegative = topNav.classList.contains(classes.negative);
+            const toggleHeight = viewHeight - topNav.offsetHeight;
 
-      // already set
-      if (isNegative && currentScroll >= toggleHeight) return;
-      if (!isNegative && currentScroll < toggleHeight) return;
+            const isNegative = topNav.classList.contains(classes.negative);
 
-      topNav.classList.toggle(classes.negative);
-    };
+            // already set
+            if (isNegative && currentScroll >= toggleHeight) return;
+            if (!isNegative && currentScroll < toggleHeight) return;
 
-    window.addEventListener("scroll", this._scrollHandler);
-  }
+            topNav.classList.toggle(classes.negative);
+        };
+
+        window.addEventListener('scroll', this._scrollHandler);
+    }
 
 }
