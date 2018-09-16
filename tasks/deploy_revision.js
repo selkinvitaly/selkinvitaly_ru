@@ -1,5 +1,5 @@
 const gulp   = require('gulp');
-const RevAll = require('gulp-rev-all');
+const revAll = require('gulp-rev-all');
 const gzip   = require('gulp-gzip');
 const config = require('config');
 
@@ -10,11 +10,9 @@ module.exports = function(options) {
     const manifest = config.get('gulp.tasks.revisions.manifest');
     const plugins  = config.get('gulp.plugins');
 
-    const revAll = new RevAll(plugins.revAll);
-
     return function() {
         return gulp.src(src)
-            .pipe(revAll.revision())
+            .pipe(revAll.revision(plugins.revAll))
             .pipe(gzip())
             .pipe(gulp.dest(dest))
             .pipe(revAll.manifestFile())

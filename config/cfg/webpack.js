@@ -31,7 +31,10 @@ module.exports = function(root) {
         plugins: [
             new webpack.NoEmitOnErrorsPlugin()
         ],
+
         optimization: {
+            minimize: isDeploy,
+
             splitChunks: {
                 cacheGroups: {
                     default: false,
@@ -64,19 +67,6 @@ module.exports = function(root) {
             }]
         }
     };
-
-    if (isDeploy) {
-        options.plugins.push(
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    'warnings': false,
-                    'drop_debugger': true,
-                    'drop_console' : true,
-                    'unsafe': true
-                }
-            })
-        );
-    }
 
     return options;
 };
