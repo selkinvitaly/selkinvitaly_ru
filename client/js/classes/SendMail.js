@@ -11,10 +11,9 @@ export default class SendMail extends BaseComponent {
         this._OK_MSG_SENT      = 'The message has been sent!';
 
         this._savedLabelButton = opts.elems.sendBtnText.textContent;
+        this._recaptcha = opts.recaptcha;
 
-        this._submitHandler = e => {
-          e.preventDefault();
-
+        this._submitHandler = () => {
           const body = this._serializeForm();
 
           this._setLoadingState();
@@ -32,7 +31,10 @@ export default class SendMail extends BaseComponent {
           });
         };
 
-        opts.elems.form.addEventListener('submit', this._submitHandler);
+        opts.elems.form.addEventListener('submit', e => {
+            e.preventDefault();
+            this._recaptcha.verify(this._submitHandler)();
+        });
     }
 
     _handleResponse(statusCode) {
