@@ -1,8 +1,9 @@
 // import NegativeTopNav from './classes/NegativeTopNav';
+// import ViewProject from './classes/ViewProject';
 import GoToScroll from './classes/GoToScroll';
 import AdaptiveNav from './classes/AdaptiveNav';
-// import ViewProject from './classes/ViewProject';
 import SendMail from './classes/SendMail';
+import RecaptchaVerificator from './classes/Recaptcha';
 
 
 // new NegativeTopNav({
@@ -48,6 +49,7 @@ new AdaptiveNav({
 // });
 
 new SendMail({
+    recaptcha: new RecaptchaVerificator(document.querySelector('.recaptcha')),
     elems: {
         form: document.querySelector('.g-contacts-form'),
         sendBtn: document.querySelector('.g-contacts-send'),
